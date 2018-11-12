@@ -20,7 +20,7 @@ def hello_world():
 @app.route('/predict', methods=["POST"])
 def predict():
     data = request.get_json()
-    print(data["values"][0]["data"])
+    #print(data["values"][0]["data"])
     output = {
         "values": []
     }
@@ -28,13 +28,13 @@ def predict():
         df = pd.DataFrame({'col':rec["data"]["text"]})
         
         df.columns = ["description"]
-        print (df)
+        #print (df)
         loaded_entity_extractor.transform(df)
-        df.head()
+        print(df.head())
         record =  {
             "recordId": "a1",
             "data": {
-                "text": df["description"].tolist()
+                "text": df["label"].tolist()
             },
             "errors": [],
             "warnings": []
