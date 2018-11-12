@@ -21,6 +21,9 @@ def hello_world():
 def predict():
     data = request.get_json()
     print(data["values"][0]["data"])
+    output = {
+        "values": []
+    }
     for rec in data["values"]:
         df = pd.DataFrame({'col':rec["data"]["text"]})
         
@@ -28,8 +31,17 @@ def predict():
         print (df)
         loaded_entity_extractor.transform(df)
         df.head()
-    
-    return jsonify(df.to_json())
+        record =  {
+            "recordId": "a1",
+            "data": {
+                "text": df["description"].tolist()
+            },
+            "errors": [],
+            "warnings": []
+        }
+        output["values"].append(record)
+    #return jsonify(df.to_json())
+    return jsonify(output)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
