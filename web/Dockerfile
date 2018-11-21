@@ -1,6 +1,6 @@
 #FROM python:3.6-onbuild
 #FROM ubuntu:18.04
-FROM tatk_base:latest
+FROM tatk-base:latest
 MAINTAINER Vinod Kurpad <vkurpad@gmail.com>
 # System packages 
 #RUN apt-get update && apt-get install -y curl
@@ -28,12 +28,14 @@ MAINTAINER Vinod Kurpad <vkurpad@gmail.com>
 #ENV PATH /miniconda/envs/tatk-env/bin:$PATH
 
 RUN echo $PATH
-
 COPY . /usr/src/app
-CMD /miniconda/bin/gunicorn
+COPY outputs /usr/src/app/outputs
+#CMD /miniconda/bin/gunicorn
 ADD environment.yml /tmp/environment.yml
-RUN conda env create -f /tmp/environment.yml
+#RUN conda env create -f /tmp/environment.yml
 # Pull the environment name out of the environment.yml
-RUN echo "source activate $(head -1 /tmp/environment.yml | cut -d' ' -f2)" > ~/.bashrc
+#RUN echo "source activate $(head -1 /tmp/environment.yml | cut -d' ' -f2)" > ~/.bashrc
 ENV PATH /miniconda/envs/$(head -1 /tmp/environment.yml | cut -d' ' -f2)/bin:$PATH
+
+ENTRYPOINT ["/bin/bash", "-c", "/miniconda/envs/tatk-env/bin/gunicorn -w 2 -b :8080 project:app"]
 

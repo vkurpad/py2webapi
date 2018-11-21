@@ -1,0 +1,14 @@
+name: tatk-env1
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.6.6
+  - conda-forge::pyodbc
+  - conda-forge::spacy==2.0.12
+  - conda-forge::tensorflow==1.10.0
+  - flask
+  - gunicorn
+  - pyopenssl
+  - pip:
+    - https://aztatksa.blob.core.windows.net/latest/msft_tatk-0.1.0b1-py3-none-any.whl 
