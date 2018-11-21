@@ -19,4 +19,6 @@ To run the solution run the following command:
 
 If you are depolying on an Azure VM, remeber to open port 80 to inbound traffic
 
+Follow these instructions if deploying to Azure Continer Instances https://docs.microsoft.com/en-us/azure/container-instances/container-instances-multi-container-group
+
  
