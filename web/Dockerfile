@@ -35,5 +35,6 @@ ADD environment.yml /tmp/environment.yml
 
 ENV PATH /miniconda/envs/$(head -1 /tmp/environment.yml | cut -d' ' -f2)/bin:$PATH
 
-ENTRYPOINT ["/bin/bash", "-c", "/miniconda/envs/tatk-env/bin/gunicorn -w 2 -b :8080 project:app"]
+#ENTRYPOINT ["/bin/bash", "-c", "/miniconda/envs/tatk-env/bin/gunicorn -w 2 -b :8080 project:app"]
+EXPOSE 8080
 
