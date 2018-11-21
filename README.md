@@ -4,9 +4,9 @@ Steps to get to a clean build:
 <ol>
  <li>Export your model as a pickle file and save it in the <a href="web/outputs">outputs</a> folder</li>
  <li>Update the environment.yml file to add any dependencies and or packages</li>
- <li>Update the __init__.py in the project folder to import all the modules needed</li>
- <li>Update the __init__.py in the project folder to load the model you saved in the outputs</li>
- <li>If you renamed the env in the environment.yml file, update the Dockerfile in the web folder to use the new env name. Also update the docker-compose.yml file with the valid path to gunicorn</li>
+ <li>Update the <a href="web/project/__init__.py">__init__.py</a> in the project folder to import all the modules needed</li>
+ <li>Update the <a href="web/project/__init__.py">__init__.py</a> in the project folder to load the model you saved in the outputs</li>
+ <li>If you renamed the env in the environment.yml file, update the <a href="web/Dockerfile">Dockerfile</a> in the web folder to use the new env name. Also update the <a href="docker-compose.yml">docker-compose.yml</a> file with the valid path to gunicorn</li>
  </ol>
  
 To build the solution make sure you have docker-compose installed. Run the following command:
