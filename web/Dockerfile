@@ -1,8 +1,32 @@
 
-FROM tatk-base:latest
+FROM ubuntu:18.04
 MAINTAINER Vinod Kurpad <vkurpad@gmail.com>
+# System packages
+RUN apt-get update && apt-get install -y curl
 
+# Install miniconda to /miniconda
+RUN curl -LO http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh
+RUN bash Miniconda-latest-Linux-x86_64.sh -p /miniconda -b
+RUN rm Miniconda-latest-Linux-x86_64.sh
+ENV PATH=/miniconda/bin:${PATH}
+RUN conda update -y conda
 
+# Python packages from conda
+RUN conda install -y \
+    flask \
+    pillow
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+COPY requirements.txt /usr/src/app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+ADD environment.yml /tmp/environment.yml
+RUN conda env create -f /tmp/environment.yml
+# Pull the environment name out of the environment.yml
+ENV PATH /miniconda/envs/tatk-env/bin:$PATH
+# END of TATK-base image
+# Start of app specific config
 RUN echo $PATH
 COPY . /usr/src/app
 COPY outputs /usr/src/app/outputs
