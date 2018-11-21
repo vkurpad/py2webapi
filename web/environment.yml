@@ -1,4 +1,4 @@
-name: tatk-env1
+name: tatk-env
 channels:
   - defaults
   - conda-forge
